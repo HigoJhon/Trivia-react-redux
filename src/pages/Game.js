@@ -7,6 +7,7 @@ class Game extends Component {
   state = {
     name: '',
     email: '',
+    totalPoint: 0,
   };
 
   componentDidMount() {
@@ -19,7 +20,7 @@ class Game extends Component {
 
   render() {
     // const { email } = this.props;
-    const { name, email } = this.state;
+    const { name, email, totalPoint } = this.state;
     const avatarGravatar = md5(email).toString();
 
     return (
@@ -34,7 +35,11 @@ class Game extends Component {
             { name }
           </div>
           <div>
-            q
+            <span data-testid="header-score">
+              Total de pontos:
+              { totalPoint < 0 ? '0' : totalPoint }
+
+            </span>
           </div>
         </header>
       </div>
