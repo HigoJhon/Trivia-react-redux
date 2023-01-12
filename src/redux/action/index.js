@@ -1,8 +1,22 @@
 export const TOKEN = 'TOKEM';
+export const NAME = 'NAME';
+export const EMAIL = 'EMAIL';
 
-export const login = (payload) => ({
+export const login = (token) => ({
   type: TOKEN,
-  payload,
+  payload: {
+    ...token,
+  },
+});
+
+export const inputName = (userName) => ({
+  type: NAME,
+  payload: userName,
+});
+
+export const inputEmail = (userEmail) => ({
+  type: EMAIL,
+  payload: userEmail,
 });
 
 export function handleAPI() {

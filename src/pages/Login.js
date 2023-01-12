@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { handleAPI } from '../redux/action';
+import { handleAPI, inputName, inputEmail } from '../redux/action';
 
 // import handleAPI from '../redux/action';
 
@@ -14,6 +14,10 @@ class Login extends React.Component {
 
   handleClick = async () => {
     const { dispatch, history } = this.props;
+    const { email, name } = this.state;
+    dispatch(inputEmail(email));
+    console.log(email);
+    dispatch(inputName(name));
     dispatch(handleAPI());
     // const tokenn = token.toString();
     // console.log(tokenn);
