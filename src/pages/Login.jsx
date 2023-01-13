@@ -19,9 +19,6 @@ class Login extends React.Component {
     console.log(email);
     dispatch(inputName(name));
     dispatch(handleAPI());
-    // const tokenn = token.toString();
-    // console.log(tokenn);
-    // localStorage.setItem('token', tokenn);
     history.push('/trivia');
   };
 
