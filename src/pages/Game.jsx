@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Header from './Header';
+import './game.css';
 import { fetchAPI } from '../redux/action';
 
 class Game extends Component {
@@ -8,11 +9,14 @@ class Game extends Component {
     results: [],
     count: 0,
     arrayQuiz: [],
+    right: false,
+    wrong: false,
   };
 
   async componentDidMount() {
     const { history } = this.props;
     const response = await fetchAPI();
+    console.log(response);
     if (response.length === 0) {
       localStorage.clear();
       history.push('/');
@@ -32,6 +36,18 @@ class Game extends Component {
     this.setState({ arrayQuiz: random });
   };
 
+  handleClick = ({ target }) => {
+    const { id } = target;
+    if (id === 'right') {
+      this.setState({ right: true });
+    }
+    this.setState({ wrong: true });
+    if (id === 'wrong') {
+      this.setState({ wrong: true });
+    }
+    this.setState({ right: true });
+  };
+
   decode(encoded) {
     const tempHTMLElement = document.createElement('textarea');
     tempHTMLElement.innerText = encoded;
@@ -39,10 +55,10 @@ class Game extends Component {
   }
 
   render() {
-    const { results, count, arrayQuiz } = this.state;
+    const { results, count, arrayQuiz, right, wrong } = this.state;
 
     return (
-      <>
+      <div className="game">
         <Header />
         {
           results.length > 0 && (
@@ -53,27 +69,33 @@ class Game extends Component {
           )
         }
         <div data-testid="answer-options">
-          {arrayQuiz.map((a, index) => (
+          {arrayQuiz.map((a) => (
             a === results[count].correct_answer ? (
               <button
-                key={ index }
+                key={ a }
                 type="button"
                 data-testid="correct-answer"
+                id="right"
+                className={ right ? 'right' : '' }
+                onClick={ this.handleClick }
               >
                 {this.decode(a)}
               </button>)
               : (
                 <button
-                  key={ index }
+                  key={ a }
                   type="button"
                   data-testid={ `wrong-answer-${count}` }
+                  id="wrong"
+                  className={ wrong ? 'wrong' : '' }
+                  onClick={ this.handleClick }
                 >
                   {this.decode(a)}
                 </button>
               )
           ))}
         </div>
-      </>
+      </div>
     );
   }
 }
