@@ -35,7 +35,6 @@ class Game extends Component {
 
   render() {
     const { results, count, arrayQuiz } = this.state;
-    console.log(results);
 
     return (
       <>

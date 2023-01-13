@@ -25,9 +25,7 @@ export function handleAPI() {
       .then((response) => response.json())
       .then((data) => {
         const tokenn = data.token.toString();
-        // console.log(tokenn);
         localStorage.setItem('token', tokenn);
-        // console.log(data);
         dispatch(login(data));
       });
   };
@@ -35,6 +33,7 @@ export function handleAPI() {
 
 export const fetchAPI = async () => {
   const valid = localStorage.getItem('token');
+  if (!valid) return [];
   const api = await fetch(`https://opentdb.com/api.php?amount=5&token=${valid}`);
   const response = await api.json();
   return response.results;
