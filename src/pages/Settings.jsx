@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Configurações extends Component {
+class Settings extends Component {
   render() {
     return (
       <div>
@@ -10,4 +10,4 @@ class Configurações extends Component {
   }
 }
 
-export default Configurações;
+export default Settings;

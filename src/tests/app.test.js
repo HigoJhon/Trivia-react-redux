@@ -39,6 +39,6 @@ describe('Testando pagina inicial', () => {
 
         userEvent.click(btnConfig);
 
-        expect(history.location.pathname).toBe('/configurações');
+        expect(history.location.pathname).toBe('/settings');
     })
 })

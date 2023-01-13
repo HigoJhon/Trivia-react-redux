@@ -16,12 +16,8 @@ class Login extends React.Component {
     const { dispatch, history } = this.props;
     const { email, name } = this.state;
     dispatch(inputEmail(email));
-    console.log(email);
     dispatch(inputName(name));
-    dispatch(handleAPI());
-    // const tokenn = token.toString();
-    // console.log(tokenn);
-    // localStorage.setItem('token', tokenn);
+    await dispatch(handleAPI());
     history.push('/trivia');
   };
 
@@ -77,7 +73,7 @@ class Login extends React.Component {
           <button
             type="button"
             data-testid="btn-settings"
-            onClick={ () => history.push('/configurações') }
+            onClick={ () => history.push('/settings') }
           >
             Config
           </button>
