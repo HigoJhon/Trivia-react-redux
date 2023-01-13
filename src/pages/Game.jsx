@@ -13,7 +13,6 @@ class Game extends Component {
   async componentDidMount() {
     const { history } = this.props;
     const response = await fetchAPI();
-    console.log(response);
     if (response.length === 0) {
       localStorage.clear();
       history.push('/');
@@ -48,35 +47,31 @@ class Game extends Component {
         {
           results.length > 0 && (
             <>
-              <p>{results[count].category}</p>
-              <p>{this.decode(results[count].question)}</p>
+              <p data-testid="question-category">{results[count].category}</p>
+              <p data-testid="question-text">{this.decode(results[count].question)}</p>
             </>
           )
         }
-        <div>
-          {arrayQuiz.map((a, index) => {
-            const valor = arrayQuiz.indexOf(results[count].correct_answers);
-            return index === valor ? (
+        <div data-testid="answer-options">
+          {arrayQuiz.map((a, index) => (
+            a === results[count].correct_answer ? (
               <button
                 key={ index }
                 type="button"
-                data-testing="correct-answer"
+                data-testid="correct-answer"
               >
                 {this.decode(a)}
-                {console.log({ b: this.decode(a), a })}
               </button>)
               : (
                 <button
                   key={ index }
                   type="button"
-                  data-testing={ `wrong-answer-${count}` }
+                  data-testid={ `wrong-answer-${count}` }
                 >
                   {this.decode(a)}
-                  {console.log({ b: this.decode(a), a })}
                 </button>
-
-              );
-          })}
+              )
+          ))}
         </div>
       </>
     );
