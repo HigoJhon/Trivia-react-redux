@@ -33,6 +33,12 @@ class Game extends Component {
     this.setState({ arrayQuiz: random });
   };
 
+  decode(encoded) {
+    const tempHTMLElement = document.createElement('textarea');
+    tempHTMLElement.innerText = encoded;
+    return tempHTMLElement.value;
+  }
+
   render() {
     const { results, count, arrayQuiz } = this.state;
 
@@ -43,7 +49,7 @@ class Game extends Component {
           results.length > 0 && (
             <>
               <p>{results[count].category}</p>
-              <p>{results[count].question}</p>
+              <p>{this.decode(results[count].question)}</p>
             </>
           )
         }
@@ -56,8 +62,8 @@ class Game extends Component {
                 type="button"
                 data-testing="correct-answer"
               >
-                {a}
-
+                {this.decode(a)}
+                {console.log({ b: this.decode(a), a })}
               </button>)
               : (
                 <button
@@ -65,7 +71,8 @@ class Game extends Component {
                   type="button"
                   data-testing={ `wrong-answer-${count}` }
                 >
-                  {a}
+                  {this.decode(a)}
+                  {console.log({ b: this.decode(a), a })}
                 </button>
 
               );

@@ -19,7 +19,7 @@ class Header extends Component {
         </h2>
         <div>
           <h2 data-testid="header-score">
-            Total de pontos:0
+            Total de pontos:0;
           </h2>
         </div>
       </header>
