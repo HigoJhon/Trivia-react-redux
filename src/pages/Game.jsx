@@ -9,8 +9,8 @@ class Game extends Component {
     results: [],
     count: 0,
     arrayQuiz: [],
-    right: false,
-    wrong: false,
+    answered: false,
+    time: 30,
   };
 
   async componentDidMount() {
@@ -25,6 +25,12 @@ class Game extends Component {
     }
   }
 
+  shouldComponentUpdate() {
+    const { time } = this.state;
+    const ondeSecond = 500;
+    return time > 0 && setTimeout(() => this.setState({ time: time - 1 }), ondeSecond);
+  }
+
   handleQuiz = () => {
     const { results, count } = this.state;
     const array = [results[count].correct_answer,
@@ -36,16 +42,8 @@ class Game extends Component {
     this.setState({ arrayQuiz: random });
   };
 
-  handleClick = ({ target }) => {
-    const { id } = target;
-    if (id === 'right') {
-      this.setState({ right: true });
-    }
-    this.setState({ wrong: true });
-    if (id === 'wrong') {
-      this.setState({ wrong: true });
-    }
-    this.setState({ right: true });
+  handleClick = () => {
+    this.setState({ answered: true });
   };
 
   decode(encoded) {
@@ -55,7 +53,7 @@ class Game extends Component {
   }
 
   render() {
-    const { results, count, arrayQuiz, right, wrong } = this.state;
+    const { results, count, arrayQuiz, answered, time } = this.state;
 
     return (
       <div className="game">
@@ -68,6 +66,9 @@ class Game extends Component {
             </>
           )
         }
+        {
+          time
+        }
         <div data-testid="answer-options">
           {arrayQuiz.map((a) => (
             a === results[count].correct_answer ? (
@@ -76,8 +77,9 @@ class Game extends Component {
                 type="button"
                 data-testid="correct-answer"
                 id="right"
-                className={ right ? 'right' : '' }
+                className={ answered ? 'right' : '' }
                 onClick={ this.handleClick }
+                disabled={ !time }
               >
                 {this.decode(a)}
               </button>)
@@ -87,8 +89,9 @@ class Game extends Component {
                   type="button"
                   data-testid={ `wrong-answer-${count}` }
                   id="wrong"
-                  className={ wrong ? 'wrong' : '' }
+                  className={ answered ? 'wrong' : '' }
                   onClick={ this.handleClick }
+                  disabled={ !time }
                 >
                   {this.decode(a)}
                 </button>
