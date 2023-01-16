@@ -63,6 +63,16 @@ class Game extends Component {
     console.log(answer);
   };
 
+  nextAnswerd = () => {
+    const { count } = this.state;
+    const max = 3;
+    const result = count > max ? 0 : count + 1;
+    this.setState({
+      count: result,
+      answered: false,
+    }, this.handleQuiz);
+  };
+
   decode(encoded) {
     const tempHTMLElement = document.createElement('textarea');
     tempHTMLElement.innerText = encoded;
@@ -71,7 +81,6 @@ class Game extends Component {
 
   render() {
     const { results, count, arrayQuiz, answered, time } = this.state;
-
     return (
       <div className="game">
         <Header />
@@ -115,6 +124,14 @@ class Game extends Component {
               )
           ))}
         </div>
+        { answered && (
+          <button
+            type="button"
+            data-testid="btn-next"
+            onClick={ this.nextAnswerd }
+          >
+            Next
+          </button>)}
       </div>
     );
   }
