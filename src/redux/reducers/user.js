@@ -4,6 +4,8 @@ const INITIAL_STATE = {
   name: '',
   email: '',
   token: '',
+  score: 0,
+  assertions: 0,
 };
 
 const user = (state = INITIAL_STATE, action) => {
@@ -11,7 +13,6 @@ const user = (state = INITIAL_STATE, action) => {
   case TOKEN:
     return {
       ...state,
-      // email: action.payload,
       token: action.payload.token,
     };
   case NAME:
@@ -24,6 +25,7 @@ const user = (state = INITIAL_STATE, action) => {
       ...state,
       email: action.payload,
     };
+
   default: return state;
   }
 };

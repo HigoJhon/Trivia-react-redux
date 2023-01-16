@@ -1,28 +1,34 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Header from './Header';
 import './game.css';
-import { fetchAPI } from '../redux/action';
+import { addAssertions, addScore, fetchAPI } from '../redux/action';
 
 class Game extends Component {
   state = {
-    results: [],
+    results: {},
     count: 0,
     arrayQuiz: [],
-    right: false,
-    wrong: false,
+    answered: false,
+    time: 30,
   };
 
   async componentDidMount() {
     const { history } = this.props;
     const response = await fetchAPI();
     console.log(response);
+    this.setState({ results: response }, this.handleQuiz);
     if (response.length === 0) {
       localStorage.clear();
       history.push('/');
-    } else {
-      this.setState({ results: response }, this.handleQuiz);
     }
+  }
+
+  shouldComponentUpdate() {
+    const { time } = this.state;
+    const ondeSecond = 500;
+    return time > 0 && setTimeout(() => this.setState({ time: time - 1 }), ondeSecond);
   }
 
   handleQuiz = () => {
@@ -37,15 +43,24 @@ class Game extends Component {
   };
 
   handleClick = ({ target }) => {
-    const { id } = target;
-    if (id === 'right') {
-      this.setState({ right: true });
-    }
-    this.setState({ wrong: true });
-    if (id === 'wrong') {
-      this.setState({ wrong: true });
-    }
-    this.setState({ right: true });
+    this.setState({ answered: true });
+    const { dispatch } = this.props;
+    const { time, results, count } = this.state;
+
+    const red = target.id.includes('wrong');
+    const checkDifficult = results[count].difficulty;
+    const difficult = {
+      hard: 3,
+      medium: 2,
+      easy: 1,
+    };
+    if (!red) dispatch(addAssertions(1));
+    const pointBase = 10;
+    const answer = red
+      ? 0 : (Number(pointBase) + (Number(time) * Number(difficult[checkDifficult]))
+      );
+    dispatch(addScore(answer));
+    console.log(answer);
   };
 
   decode(encoded) {
@@ -55,7 +70,7 @@ class Game extends Component {
   }
 
   render() {
-    const { results, count, arrayQuiz, right, wrong } = this.state;
+    const { results, count, arrayQuiz, answered, time } = this.state;
 
     return (
       <div className="game">
@@ -68,6 +83,9 @@ class Game extends Component {
             </>
           )
         }
+        {
+          time
+        }
         <div data-testid="answer-options">
           {arrayQuiz.map((a) => (
             a === results[count].correct_answer ? (
@@ -76,8 +94,9 @@ class Game extends Component {
                 type="button"
                 data-testid="correct-answer"
                 id="right"
-                className={ right ? 'right' : '' }
+                className={ answered ? 'right' : '' }
                 onClick={ this.handleClick }
+                disabled={ !time }
               >
                 {this.decode(a)}
               </button>)
@@ -87,8 +106,9 @@ class Game extends Component {
                   type="button"
                   data-testid={ `wrong-answer-${count}` }
                   id="wrong"
-                  className={ wrong ? 'wrong' : '' }
+                  className={ answered ? 'wrong' : '' }
                   onClick={ this.handleClick }
+                  disabled={ !time }
                 >
                   {this.decode(a)}
                 </button>
@@ -104,6 +124,7 @@ Game.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
-export default Game;
+export default connect()(Game);
