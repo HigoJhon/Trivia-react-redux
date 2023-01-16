@@ -7,7 +7,7 @@ import { addAssertions, addScore, fetchAPI } from '../redux/action';
 
 class Game extends Component {
   state = {
-    results: [],
+    results: {},
     count: 0,
     arrayQuiz: [],
     answered: false,
@@ -18,11 +18,10 @@ class Game extends Component {
     const { history } = this.props;
     const response = await fetchAPI();
     console.log(response);
+    this.setState({ results: response }, this.handleQuiz);
     if (response.length === 0) {
       localStorage.clear();
       history.push('/');
-    } else {
-      this.setState({ results: response }, this.handleQuiz);
     }
   }
 

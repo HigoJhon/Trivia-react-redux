@@ -1,4 +1,4 @@
-import { TOKEN, NAME, EMAIL, ADD_SCORE, ADD_ASSERTIONS } from '../action';
+import { TOKEN, NAME, EMAIL } from '../action';
 
 const INITIAL_STATE = {
   name: '',
@@ -25,16 +25,7 @@ const user = (state = INITIAL_STATE, action) => {
       ...state,
       email: action.payload,
     };
-  case ADD_SCORE:
-    return {
-      ...state,
-      score: state.score + action.payload,
-    };
-  case ADD_ASSERTIONS:
-    return {
-      ...state,
-      assertions: state.assertions + action.payload,
-    };
+
   default: return state;
   }
 };
