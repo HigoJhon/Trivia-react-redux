@@ -12,6 +12,7 @@ class Game extends Component {
     arrayQuiz: [],
     answered: false,
     time: 30,
+    btnNext: true,
   };
 
   async componentDidMount() {
@@ -43,7 +44,9 @@ class Game extends Component {
   };
 
   handleClick = ({ target }) => {
-    this.setState({ answered: true });
+    this.setState({ 
+      answered: true, 
+    });
     const { dispatch } = this.props;
     const { time, results, count } = this.state;
 
@@ -69,9 +72,19 @@ class Game extends Component {
     return tempHTMLElement.value;
   }
 
-  render() {
-    const { results, count, arrayQuiz, answered, time } = this.state;
+  nextAnswerd = () => {
+    const { count } = this.state;
+    const max = 3;
+    const result = count > max ? 0 : count + 1;
+    this.setState({
+      count: result,
+      answered: false,
+    }, this.handleQuiz)
+  }
 
+
+  render() {
+    const { results, count, arrayQuiz, answered, time, btnNext } = this.state;
     return (
       <div className="game">
         <Header />
@@ -115,6 +128,13 @@ class Game extends Component {
               )
           ))}
         </div>
+        { answered && (
+          <button
+        data-testid="btn-next"
+        onClick={ this.nextAnswerd }
+        >
+          Next
+        </button>)}
       </div>
     );
   }
