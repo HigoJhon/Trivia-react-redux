@@ -19,7 +19,7 @@ describe('Testando pagina inicial', () => {
         expect(inputName).toBeInTheDocument();
         expect(inputEmail).toBeInTheDocument();
     })
-    test('testando button de validação', () => {
+    test('testando button de validaçãoo', () => {
         const { history } = renderWithRouterAndRedux(<App />);
 
         const inputName = screen.getByTestId(name);
