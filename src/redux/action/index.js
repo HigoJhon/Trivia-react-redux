@@ -1,6 +1,8 @@
 export const TOKEN = 'TOKEM';
 export const NAME = 'NAME';
 export const EMAIL = 'EMAIL';
+export const ADD_SCORE = 'SCORE';
+export const ADD_ASSERTIONS = 'ASSERTIONS';
 
 export const login = (token) => ({
   type: TOKEN,
@@ -17,6 +19,16 @@ export const inputName = (userName) => ({
 export const inputEmail = (userEmail) => ({
   type: EMAIL,
   payload: userEmail,
+});
+
+export const addScore = (score) => ({
+  type: ADD_SCORE,
+  payload: score,
+});
+
+export const addAssertions = (assertions) => ({
+  type: ADD_ASSERTIONS,
+  payload: assertions,
 });
 
 export function handleAPI() {

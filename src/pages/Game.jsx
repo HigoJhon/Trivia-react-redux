@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Header from './Header';
 import './game.css';
-import { fetchAPI } from '../redux/action';
+import { addAssertions, addScore, fetchAPI } from '../redux/action';
 
 class Game extends Component {
   state = {
@@ -42,8 +43,25 @@ class Game extends Component {
     this.setState({ arrayQuiz: random });
   };
 
-  handleClick = () => {
+  handleClick = ({ target }) => {
     this.setState({ answered: true });
+    const { dispatch } = this.props;
+    const { time, results, count } = this.state;
+
+    const red = target.id.includes('wrong');
+    const checkDifficult = results[count].difficulty;
+    const difficult = {
+      hard: 3,
+      medium: 2,
+      easy: 1,
+    };
+    if (!red) dispatch(addAssertions(1));
+    const pointBase = 10;
+    const answer = red
+      ? 0 : (Number(pointBase) + (Number(time) * Number(difficult[checkDifficult]))
+      );
+    dispatch(addScore(answer));
+    console.log(answer);
   };
 
   decode(encoded) {
@@ -107,6 +125,7 @@ Game.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
-export default Game;
+export default connect()(Game);

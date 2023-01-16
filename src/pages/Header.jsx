@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 
 class Header extends Component {
   render() {
-    const { name, email } = this.props;
+    const { name, email, score, assertions } = this.props;
     const avatarGravatar = md5(email).toString();
+    console.log(score);
     return (
       <header>
         <img
@@ -18,9 +19,16 @@ class Header extends Component {
           { name }
         </h2>
         <div>
-          <h2 data-testid="header-score">
-            Total de pontos:0;
-          </h2>
+          <span>SCORE:</span>
+          <span data-testid="header-score">
+            { score }
+          </span>
+        </div>
+        <div>
+          <span>ASSERTIONS:</span>
+          <span>
+            { assertions }
+          </span>
         </div>
       </header>
     );
@@ -30,11 +38,15 @@ class Header extends Component {
 Header.propTypes = {
   email: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
+  assertions: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   email: state.user.email,
   name: state.user.name,
+  score: state.user.score,
+  assertions: state.user.assertions,
 });
 
 export default connect(mapStateToProps)(Header);
