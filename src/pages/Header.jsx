@@ -7,7 +7,6 @@ class Header extends Component {
   render() {
     const { name, email, score, assertions } = this.props;
     const avatarGravatar = md5(email).toString();
-    console.log(score);
     return (
       <header>
         <img

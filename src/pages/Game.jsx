@@ -17,19 +17,25 @@ class Game extends Component {
   async componentDidMount() {
     const { history } = this.props;
     const response = await fetchAPI();
-    console.log(response);
     this.setState({ results: response }, this.handleQuiz);
     if (response.length === 0) {
       localStorage.clear();
       history.push('/');
     }
+    const countTime = 1000;
+    this.timeId = setInterval(() => this.timer(), countTime);
   }
 
-  shouldComponentUpdate() {
-    const { time } = this.state;
-    const ondeSecond = 500;
-    return time > 0 && setTimeout(() => this.setState({ time: time - 1 }), ondeSecond);
-  }
+  timer = () => {
+    this.setState((prev) => ({
+      time: prev.time - 1,
+    }), () => {
+      const { time } = this.state;
+      if (time <= 0) {
+        clearInterval(this.timeId);
+      }
+    });
+  };
 
   handleQuiz = () => {
     const { results, count } = this.state;
@@ -60,17 +66,22 @@ class Game extends Component {
       ? 0 : (Number(pointBase) + (Number(time) * Number(difficult[checkDifficult]))
       );
     dispatch(addScore(answer));
-    console.log(answer);
   };
 
   nextAnswerd = () => {
     const { count } = this.state;
+    const { history } = this.props;
     const max = 3;
     const result = count > max ? 0 : count + 1;
     this.setState({
       count: result,
       answered: false,
+      time: 30,
     }, this.handleQuiz);
+    const four = 4;
+    if (count === four) {
+      history.push('/Feedback');
+    }
   };
 
   decode(encoded) {
