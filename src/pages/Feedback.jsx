@@ -7,7 +7,7 @@ const three = 3;
 
 class Feedback extends Component {
   render() {
-    const { name, email, score, assertions } = this.props;
+    const { name, email, score, assertions, history } = this.props;
     const avatarGravatar = md5(email).toString();
     const inputText = assertions >= three ? 'Well Done!' : 'Could be better...';
     return (
@@ -41,6 +41,21 @@ class Feedback extends Component {
             { score }
           </span>
         </div>
+        <br />
+        <button
+          type="button"
+          data-testid="btn-play-again"
+          onClick={ () => history.push('/') }
+        >
+          Play Again
+        </button>
+        <button
+          type="button"
+          data-testid="btn-ranking"
+          onClick={ () => history.push('/Ranking') }
+        >
+          Ranking
+        </button>
       </header>
     );
   }
@@ -51,6 +66,9 @@ Feedback.propTypes = {
   name: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired,
   assertions: PropTypes.number.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
 };
 
 const mapStateToProps = (state) => ({
