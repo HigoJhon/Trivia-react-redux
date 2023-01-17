@@ -21,7 +21,7 @@ describe('Testando pagina inicial', () => {
     })
     test('testando button de validação', () => {
         const { history } = renderWithRouterAndRedux(<App />);
-
+        
         const inputName = screen.getByTestId(name);
         const inputEmail = screen.getByTestId(email);
         const btnPlay = screen.getByTestId(play)
