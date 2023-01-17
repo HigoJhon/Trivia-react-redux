@@ -80,7 +80,7 @@ class Game extends Component {
     }, this.handleQuiz);
     const four = 4;
     if (count === four) {
-      history.push('/feedback');
+      history.push('/Feedback');
     }
   };
 
