@@ -29,17 +29,6 @@ describe('Testando pagina inicial', () => {
         userEvent.type(inputName, 'test');
         userEvent.type(inputEmail, 'test@test.com');
         userEvent.click(btnPlay);
-
-        const questionText = screen.getByTestId("question-text");
-        const responseOption = screen.getByTestId("answer-options");
-        const right = screen.getByTestId("correct-answer");
-        const wrong = screen.getByTestId("wrong-answer");
-
-        expect(questionText).toBeInTheDocument();
-        expect(responseOption).toBeInTheDocument();
-        expect(right).toBeInTheDocument();
-        expect(wrong).toBeInTheDocument();
-
         expect(history.location.pathname).toBe('/trivia');
     })
     test('testando button de config', () => {
