@@ -11,5 +11,4 @@ No final você pode vizualiza seu 'Acertos' e 'Score'.
 Ao final das questoes vc pode jogar novamente ou ver ser Ranking.
 
 
-## Caso queria jogar é so clonar e iniciar com o
-#### 'npm test'.
+## Caso queria jogar é so clonar e iniciar com o "npm start" no seu terminal.
