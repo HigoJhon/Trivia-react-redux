@@ -11,7 +11,7 @@ class App extends React.Component {
     return (
       <div>
         <Switch>
-          <Route exact path="/" component={ Login } />
+          <Route exact path="/Trivia-react-redux/" component={ Login } />
           <Route exact path="/settings" component={ Settings } />
           <Route exact path="/trivia" component={ Game } />
           <Route exact path="/feedback" component={ Feedback } />
