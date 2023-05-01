@@ -1,4 +1,4 @@
-# :construction: Projeto Trivia! :construction:
+# :heavy_check_mark: Projeto Trivia! :x:
 
 Este Projeto foi desenvolvido em time que se trata de um jogo de perguntas e resposta baseado no `Jogo do milhão` utilizando React e Redux, nele o usuario e capaz de:
 
@@ -16,7 +16,6 @@ Este Projeto foi desenvolvido em time que se trata de um jogo de perguntas e res
 * Conectar Redux aos componentes React
 * Actions assíncronas na aplicação React que faz uso de Redux.
 * Testes para garantir o bom uso da aplicação.
-
 
 #### Caso queira ver em seu navegardor e so cliclar no link a baixo.
 #### https://higojhon.github.io/Trivia-react-redux/
