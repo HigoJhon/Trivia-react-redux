@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.32527e01.css","mappings":"AAAA,aACE,wBACF,CAEA,aACE,oBACF","sources":["pages/game.css"],"sourcesContent":[".game .right {\n  border: 3px solid rgb(6, 240, 15);\n}\n\n.game .wrong {\n  border: 3px solid red;\n}\n"],"names":[],"sourceRoot":""}
