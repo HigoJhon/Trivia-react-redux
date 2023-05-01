@@ -1,14 +1,22 @@
 # :construction: Projeto Trivia! :construction:
 
-### O que foi desenvolvido nesse projeto:
+Este Projeto foi desenvolvido em time que se trata de um jogo de perguntas e resposta baseado no `Jogo do milhão` utilizando React e Redux, nele o usuario e capaz de:
 
-Tela de Nome e Email e da o 'play'.
+* Por Nome e Email e da o 'play'.
+* Entra em um game com 5 questões de multipla escolha com um tempo de 30 sec.
+* Vizualiza seu 'Acertos' e 'Score'.
+* Jogar novamente ou ver ser Ranking, ao final de cada jogo.
 
-Logo depois vc entra em um game com 5 questões de multipla escolha com um tempo de 30 sec.
+#### Habilidades usadas:
 
-No final você pode vizualiza seu 'Acertos' e 'Score'.
+* Store Redux em aplicações React
+* Reducers no Redux em aplicações React
+* Actions no Redux em aplicações React
+* Dispatchers no Redux em aplicações React
+* Conectar Redux aos componentes React
+* Actions assíncronas na aplicação React que faz uso de Redux.
+* Testes para garantir o bom uso da aplicação.
 
-Ao final das questoes vc pode jogar novamente ou ver ser Ranking.
 
-
-## Caso queria jogar é so clonar e iniciar com o "npm start" no seu terminal.
+#### Caso queira ver em seu navegardor e so cliclar no link a baixo.
+#### https://higojhon.github.io/Trivia-react-redux/

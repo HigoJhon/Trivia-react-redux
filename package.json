@@ -20,6 +20,8 @@
     "redux-thunk": "^2.4.1"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "cy": "env CY_CLI=true cypress run",
     "cy:open": "cypress open --e2e --browser chrome",
     "start": "env ESLINT_NO_DEV_ERRORS=true react-scripts start",
@@ -72,5 +74,18 @@
       "src/utils/*",
       "src/tests/helpers/*"
     ]
-  }
+  },
+  "description": "Neste Projeto",
+  "main": "cypress.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HigoJhon/Trivia-react-redux.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HigoJhon/Trivia-react-redux/issues"
+  },
+  "homepage": "https://higojhon.github.io/Trivia-react-redux/"
 }
